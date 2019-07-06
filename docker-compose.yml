@@ -4,10 +4,12 @@ services:
     build: .
     volumes:
       - "./app:/root/app"
+      - "./.env:/root/.env"
     working_dir: /root
     environment:
       PYTHONPATH: "/root/app"
       PYTHONIOENCODIND: utf_8
+      PIPENV_DOTENV_LOCATION: /root/.env
       TZ: Asia/Tokyo
     restart: unless-stopped
     command: cron -f
