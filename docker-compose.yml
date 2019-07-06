@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    build: .
+    volumes:
+      - "./app:/root/app"
+    working_dir: /root
+    environment:
+      PYTHONPATH: "/root/app"
+      PYTHONIOENCODIND: utf_8
+      TZ: Asia/Tokyo
+    restart: unless-stopped
+    command: cron -f
