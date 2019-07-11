@@ -12,7 +12,7 @@ COPY Pipfile ./
 COPY Pipfile.lock ./
 
 RUN apt-get update && apt-get upgrade -y && \
-  apt-get install -y --no-install-recommends apt-utils curl ca-certificates cron git libfontconfig fontconfig unzip && \
+  apt-get install -y --no-install-recommends apt-utils curl ca-certificates git libfontconfig fontconfig unzip && \
   mkdir -p /usr/share/fonts/opentype/noto && \
   curl -O https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip && \
   unzip NotoSansCJKjp-hinted.zip -d /usr/share/fonts/opentype/noto && \
@@ -31,7 +31,3 @@ RUN apt-get update && apt-get upgrade -y && \
   pip install --upgrade pip setuptools pipenv && \
   set -ex && pipenv install --deploy --system && \
   rm -rf ${HOME}/.cache/pip
-
-RUN echo 'HOME=/root' >> /etc/crontab && \
-  echo 'PYTHONPATH=/root/app:${PYTHONPATH}' >> /etc/crontab && \
-  echo '*/15 * * * * root python /root/app/main.py' >> /etc/crontab

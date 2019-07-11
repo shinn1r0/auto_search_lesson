@@ -4,6 +4,7 @@ services:
     build: .
     volumes:
       - "./app:/root/app"
+      - "./logs:/root/logs"
       - "./.env:/root/.env"
     working_dir: /root
     environment:
@@ -12,4 +13,4 @@ services:
       PIPENV_DOTENV_LOCATION: /root/.env
       TZ: Asia/Tokyo
     restart: unless-stopped
-    command: cron -f
+    command: /bin/sh -c "python /root/app/main.py >> /root/logs/main_log.txt"

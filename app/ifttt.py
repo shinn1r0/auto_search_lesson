@@ -1,5 +1,5 @@
 import requests
-from app.settings import IFTTT_WEBHOOKS_KEY
+from settings import IFTTT_WEBHOOKS_KEY
 
 
 def ifttt_webhook(eventid, payload=None):
