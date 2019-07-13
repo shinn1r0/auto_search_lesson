@@ -1,8 +1,6 @@
 FROM python:latest
 LABEL maintainer="shinichir0 <github@shinichironaito.com>"
 
-ARG chrome_driver_version="76.0.3809.25"
-
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
@@ -19,10 +17,10 @@ RUN apt-get update && apt-get upgrade -y && \
   rm NotoSansCJKjp-hinted.zip && \
   fc-cache -f && \
   apt-get install -y --no-install-recommends fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 libnspr4 libnss3 libx11-xcb1 libxtst6 lsb-release xdg-utils && \
-  curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+  curl -sSLO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
   dpkg -i google-chrome-stable_current_amd64.deb && \
   rm google-chrome-stable_current_amd64.deb && \
-  curl -O https://chromedriver.storage.googleapis.com/${chrome_driver_version}/chromedriver_linux64.zip && \
+  curl -sSLO https://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip && \
   unzip chromedriver_linux64.zip -d /usr/local/bin/ && \
   rm chromedriver_linux64.zip && \
   rm -rf /var/lib/apt/lists/* && \

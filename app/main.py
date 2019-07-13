@@ -1,5 +1,5 @@
 from datetime import datetime
-import time
+from time import sleep
 import schedule
 from ifttt import ifttt_webhook
 
@@ -18,7 +18,7 @@ def main():
 
     while True:
         schedule.run_pending()
-        time.sleep(1)
+        sleep(1)
 
 
 if __name__ == "__main__":
