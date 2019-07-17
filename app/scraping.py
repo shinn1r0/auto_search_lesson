@@ -9,12 +9,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from settings import *
 
 
-def get_status():
-    options = ChromeOptions()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    driver = Chrome(options=options)
-    wait = WebDriverWait(driver, 10)
+def get_status(driver: Chrome = None, wait: WebDriverWait = None):
+    if driver is None:
+        options = ChromeOptions()
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        driver = Chrome(options=options)
+        wait = WebDriverWait(driver, 10)
     try:
         driver.get(URL_TOP)
         current_url = driver.current_url
@@ -93,16 +94,15 @@ def get_open_lesson(driver: Chrome, wait: WebDriverWait):
         for tomorrow_lesson in tomorrow_lessons:
             lessons.append('tomorrow: ' + tomorrow_lesson)
         if len(lessons) == 0:
-            return None
+            return driver, wait, None
         else:
-            return lessons
+            return driver, wait, lessons
 
     except WebDriverException as e:
         print(e)
-        return None
-    finally:
         driver.close()
         driver.quit()
+        return None
 
 
 def get_day_open_lesson(driver: Chrome, wait: WebDriverWait, day: datetime):
