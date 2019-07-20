@@ -19,6 +19,8 @@ class Scraping:
         options = ChromeOptions()
         if headless:
             options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--disable-gpu')
         self.driver: Chrome = Chrome(options=options)
         self.wait: WebDriverWait = WebDriverWait(self.driver, 10)
