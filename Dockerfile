@@ -5,17 +5,9 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 ENV HOME /root
-ENV PYTHONPATH /root/app
-ENV PYTHONIOENCODIND utf_8
-ENV PIPENV_DOTENV_LOCATION /root/.env
-ENV TZ Asia/Tokyo
-
-WORKDIR /root
 
 COPY Pipfile ./
 COPY Pipfile.lock ./
-COPY app /root/app
-COPY .env /root/.env
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install -y --no-install-recommends apt-utils curl ca-certificates git libfontconfig fontconfig unzip && \
@@ -37,5 +29,3 @@ RUN apt-get update && apt-get upgrade -y && \
   pip install --upgrade pip setuptools pipenv && \
   set -ex && pipenv install --deploy --system && \
   rm -rf ${HOME}/.cache/pip
-
-CMD python /root/app/main.py
