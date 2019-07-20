@@ -2,6 +2,7 @@ version: '3'
 services:
   app:
     build: .
+    image: shinn1r0/auto_search_lesson
     volumes:
       - "./app:/root/app"
       - "./logs:/root/logs"
