@@ -161,7 +161,12 @@ if __name__ == "__main__":
     print(reserve_day)
     print(today)
     print(lesson_time)
-    exit(0)
+    # lesson_time = datetime.today() + timedelta(minutes=20)
+    if lesson_time - timedelta(minutes=45) < today < lesson_time + timedelta(hours=1):
+        print("in time")
+    else:
+        print("out time")
+    # exit(0)
     result = scraper.get_open_lesson()
     if type(result) == tuple:
         if result[0] == "normal":
