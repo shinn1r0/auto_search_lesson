@@ -61,14 +61,14 @@ def job():
                 last_status["lesson_time"] = lesson_time
                 last_status["exec_day"] = exec_day
 
-    if not fail_frag:
-        if lessons is not None and len(lessons) != 0:
-            payload = {"value1": len(lessons),
-                       "value2": lessons}
-            r = ifttt_webhook("open_lesson", payload=payload)
-            print(r.text)
-        else:
-            print("no lessons left")
+            if lessons is not None:
+                if len(lessons) != 0:
+                    payload = {"value1": len(lessons),
+                               "value2": lessons}
+                    r = ifttt_webhook("open_lesson", payload=payload)
+                    print(r.text)
+                else:
+                    print("no lessons left")
 
 
 def main():
